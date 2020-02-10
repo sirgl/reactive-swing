@@ -61,6 +61,9 @@ class SwingKit(private val logger: Logger) : UiKit {
         return reconciliationInProgress
     }
 
+    /**
+     * [component] can't be used after mount
+     */
     fun mount(component: Component<*>): JComponent {
         val rootNode = renderComponent(component)
         logger.log(LogFeature.NewTree) { treeWithIndents(rootNode) }

@@ -10,5 +10,4 @@ interface VirtualNodeType<Props: Any>
 
 object NoProps
 
-
 object NoPropsType : VirtualNodeType<NoProps>

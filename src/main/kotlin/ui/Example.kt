@@ -13,20 +13,24 @@ data class ExampleProps(
 )
 
 class ExampleComponent(props: ExampleProps, kit: UiKit) : StatefulComponent<ExampleProps, Int>(props, 2, kit) {
+    private fun handleAdd() {
+        setState { state + 1 }
+    }
+
+    private fun handleRemove() {
+        setState { state - 1 }
+    }
+
     override fun RenderContext.render() {
         box {
-            label(state.toString())
+            label("Total: $state")
             box {
-                for (i in 0..state) {
+                for (i in 0 until state) {
                     label(i.toString())
                 }
             }
-            button("add", onClick = {
-                setState { state + 1 }
-            })
-            button("remove", onClick = {
-                setState { state - 1 }
-            })
+            button("add", onClick = ::handleAdd)
+            button("remove", onClick = ::handleRemove)
         }
     }
 }

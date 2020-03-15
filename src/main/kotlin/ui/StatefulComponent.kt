@@ -8,8 +8,10 @@ abstract class StatefulComponent<Props: Any, State: Any>(
     var state: State = state
         private set
 
-    fun setState(f: () -> State) {
-        state = f()
+    fun changeState(f: State.() -> Unit) {
+        with(state) {
+            f()
+        }
         if (!kit.isReconciliationInProgress()) {
             kit.reconcile()
         }

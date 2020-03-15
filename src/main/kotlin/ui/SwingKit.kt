@@ -2,6 +2,7 @@ package ui
 
 import ui.nodes.BoxType
 import ui.nodes.ButtonType
+import ui.nodes.InputFieldType
 import ui.nodes.LabelType
 import ui.swing.*
 import javax.swing.JComponent
@@ -17,6 +18,7 @@ class SwingKit(private val logger: Logger) : UiKit {
         val widget: Widget<out Any> = when (val type = node.type) {
             is ButtonType -> ButtonWidget(type.props(node))
             is LabelType -> LabelWidget(type.props(node))
+            is InputFieldType -> InputFieldWidget(type.props(node))
             is BoxType -> BoxWidget(node.children.map { createNativeWidget(it) }.toMutableList())
             else -> throw UnsupportedOperationException("$type node is not native for swing")
         }

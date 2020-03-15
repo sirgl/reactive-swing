@@ -17,7 +17,6 @@ class ButtonWidget(
     private var listener: ActionListener? = null
 
     override fun updateFromProps(newProps: ButtonProps) {
-        super.updateFromProps(newProps)
         button.text = newProps.label
         if (listener != null) {
             button.removeActionListener(listener)

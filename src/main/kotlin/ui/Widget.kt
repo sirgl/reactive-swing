@@ -56,6 +56,8 @@ abstract class LeafWidget<Props: Any>(props: Props) : PropsHoldingWidget<Props>(
     override fun addChild(index: Int, child: Widget<*>): Unit = throw UnsupportedOperationException()
 
     override fun removeChild(index: Int): Widget<*> = throw UnsupportedOperationException()
+
+    abstract override fun updateFromProps(newProps: Props)
 }
 
 fun <T : Any> Widget<T>.tryUpdateProperties(propsOwner: PropsOwner<*>): Boolean {

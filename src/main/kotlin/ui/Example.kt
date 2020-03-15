@@ -2,6 +2,7 @@ package ui
 
 import ui.nodes.box
 import ui.nodes.button
+import ui.nodes.inputField
 import ui.nodes.label
 import java.util.*
 import javax.swing.JFrame
@@ -12,25 +13,35 @@ data class ExampleProps(
     val number: Int
 )
 
-class ExampleComponent(props: ExampleProps, kit: UiKit) : StatefulComponent<ExampleProps, Int>(props, 2, kit) {
+class ExampleState(
+    var count: Int,
+    var text: String
+)
+
+class ExampleComponent(props: ExampleProps, kit: UiKit) : StatefulComponent<ExampleProps, ExampleState>(props, ExampleState(2, "foo"), kit) {
     private fun handleAdd() {
-        setState { state + 1 }
+        changeState {
+            count++
+        }
     }
 
     private fun handleRemove() {
-        setState { state - 1 }
+        changeState {
+            count--
+        }
     }
 
     override fun RenderContext.render() {
         box {
-            label("Total: $state")
+            label("Total: ${state.count}")
             box {
-                for (i in 0 until state) {
+                for (i in 0 until state.count) {
                     label(i.toString())
                 }
             }
             button("add", onClick = ::handleAdd)
             button("remove", onClick = ::handleRemove)
+            inputField(state::text) // TODO here I should notify that text changes
         }
     }
 }
